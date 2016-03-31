@@ -2,8 +2,9 @@
 Order of processing SQL
 ![Order](Order_of_processing_smaller.jpg "Order_of_processing")
 
-
+<p align="center">
 <img src="Join_diagram.jpg" width=400/>
+</p>
 
 ### Some good practices
 
