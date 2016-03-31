@@ -4,6 +4,7 @@ Order of processing SQL:
 ![Order](week3/Order_of_processing_smaller.jpg "Order_of_processing")
 
 General concepts behind outer joins:
+
 <img src="week3/Join_diagram.jpg" width=400/>
 
 ### Some good practices
