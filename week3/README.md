@@ -1,4 +1,6 @@
 # Week3 Homework Notes
+Order of processing SQL
+![Order](Order_of_processing_smaller.jpg "Order_of_processing")
 
 Here's a picture to remind you of the general concepts behind outer joins:
 ![Join diagram](Join_diagram.jpg "Join_diagram")
