@@ -3,7 +3,7 @@ Order of processing SQL
 ![Order](Order_of_processing_smaller.jpg "Order_of_processing")
 
 
-<img src="Join_diagram.jpg" alt="Drawing" style="float: center; width: 400px;"/>
+<img src="Join_diagram.jpg" width=400/>
 
 ### Some good practices
 
