@@ -104,3 +104,86 @@ LEFT JOIN (SELECT DISTINCT dall.user_guid, dall.breed
   ON DistinctUUsersID.user_guid=d.user_guid
 GROUP BY DistinctUUsersID.user_guid;
 ```
+
+## Some key points about IF
+* `IF([your conditions],[value outputted if conditions are met],[value outputted if conditions are NOT met])`
+* Single IF expressions can only result in one of two specified outputs, but multiple IF expressions can be nested to result in more than two possible outputs. When you nest IF expressions, it is important to encase each IF expression--as well as the entire IF expression put together--in parentheses.
+* The IF function is not supported by all database platforms, and some spell the function as IIF rather than IF, so be sure to double-check how the function works in the platform you are using.
+* If nested IF expressions seem confusing or hard to read, don't worry, there is a better function available for situations when you want to use conditional logic to output more than two groups. That function is called CASE.
+
+### Some IF samples:
+```MySQL
+%%sql
+SELECT IF(cleaned_users.country='US','In US',
+          IF(cleaned_users.country='N/A','Not Applicable','Outside US')) AS US_user,
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+```
+
+## Some key points about CASE
+
+![CASE_pic](CASE_statement_expression.jpg)
+
+* CASE can be used to rename or revise values in a column.
+
+* Make sure to include the word END at the end of the expression
+```MySQL
+%%sql
+SELECT d.dog_guid, d.dog_fixed,
+        CASE
+            WHEN d.dog_fixed=1 THEN 'neutered'
+            WHEN d.dog_fixed=0 THEN 'not neutered'
+            ELSE NULL
+        END AS label
+FROM dogs d
+LIMIT 10
+```
+* CASE expressions do not require parentheses
+* ELSE expressions are optional
+* If an ELSE expression is omitted, NULL values will be outputted for all rows that do not meet any of the conditions stated explicitly in the expression
+* CASE expressions can be used anywhere in a SQL statement, including in GROUP BY, HAVING, and ORDER BY clauses or the SELECT column list.
+
+* Case expressions are also useful for breaking values in a column up into multiple groups that meet specific criteria or that have specific ranges of values.
+```MySQL
+%%sql
+SELECT d.dog_guid, d.weight,
+    CASE
+        WHEN d.weight >=1 and d.weight <=10 THEN 'very small'
+        WHEN d.weight >10 and d.weight <=30 THEN 'small'
+        WHEN d.weight >30 and d.weight <=50 THEN 'medium'
+        WHEN d.weight >50 and d.weight <=85 THEN 'large'
+        WHEN d.weight >85 THEN 'very large'
+    ELSE 'just weird'
+    END AS label
+FROM dogs d
+LIMIT 10
+```
+
+### Some CASE samples:
+```MySQL
+SELECT CASE WHEN cleaned_users.country="US" THEN "In US"
+            WHEN cleaned_users.country="N/A" THEN "Not Applicable"
+            ELSE "Outside US"
+            END AS US_user,
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+```
+Or in shorter format
+```MySQL
+SELECT CASE cleaned_users.country
+            WHEN "US" THEN "In US"
+            WHEN "N/A" THEN "Not Applicable"
+            ELSE "Outside US"
+            END AS US_user,
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+```
