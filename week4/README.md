@@ -187,3 +187,8 @@ FROM (SELECT DISTINCT user_guid, country
       WHERE country IS NOT NULL) AS cleaned_users
 GROUP BY US_user
 ```
+
+## Order of logical operations
+![evaluation_order](evaluation_order.jpg)
+*`So make sure you always pay attention to the order in which your logical operators are listed in your expressions, and whenever possible, include parentheses to ensure that the expressions are evaluated in the way you intend!
+`*
