@@ -1089,5 +1089,5 @@ Dec has the most returns.
 ## Certificate
 
 <p align="center">
-<img src="Certificate_Duke_sql.png" width=400/>
+<img src="Certificate_Duke_sql.png" width=600/>
 </p>

@@ -59,5 +59,5 @@ the performance of a group.
 ## Certificate
 
 <p align="center">
-<img src="week5/Certificate_Duke_sql.png" width=400/>
+<img src="week5/Certificate_Duke_sql.png" width=600/>
 </p>
